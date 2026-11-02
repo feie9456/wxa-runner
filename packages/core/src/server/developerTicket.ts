@@ -12,7 +12,7 @@ import { execFile } from 'child_process';
 import { randomUUID } from 'crypto';
 import { setTimeout as sleep } from 'timers/promises';
 import { WebSocket } from 'ws';
-import { DeveloperTicket, findDeveloperTicket, findElectronDevtoolsCli, TICKET_ENV } from '@open-wxa/wxa-runner-extractor';
+import { DeveloperTicket, findDeveloperTicket, findElectronDevtoolsCli, TICKET_ENV } from '@feie9456/wxa-runner-extractor';
 
 export type TicketSource = () => Promise<DeveloperTicket | null>;
 

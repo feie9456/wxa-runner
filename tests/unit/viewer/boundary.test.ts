@@ -14,7 +14,7 @@ const { build } = createRequire(path.join(REPO_ROOT, 'packages/core/package.json
 
 const VIEWER_SRC = path.join(REPO_ROOT, 'packages/viewer/src');
 const CORE_SRC = path.join(REPO_ROOT, 'packages/core/src');
-const CORE_EXPORTS = new Set(['@open-wxa/wxa-runner-core', '@open-wxa/wxa-runner-core/web', '@open-wxa/wxa-runner-core/setup']);
+const CORE_EXPORTS = new Set(['@feie9456/wxa-runner-core', '@feie9456/wxa-runner-core/web', '@feie9456/wxa-runner-core/setup']);
 /** 跑在浏览器、Service Worker、Cloudflare Worker 里的部分，只能用 core 不依赖 Node 的 /web */
 const BROWSER_SIDE = ['page', 'sw', 'proxy.ts', 'store.ts', 'pack/format.ts'];
 
@@ -36,7 +36,7 @@ describe('查看器与 core 的边界', () => {
       imports(file)
         .filter(specifier => {
           if (specifier.startsWith('.')) return !path.resolve(path.dirname(file), specifier).startsWith(path.join(REPO_ROOT, 'packages/viewer') + path.sep);
-          return specifier.startsWith('@open-wxa/wxa-runner-core') && !CORE_EXPORTS.has(specifier);
+          return specifier.startsWith('@feie9456/wxa-runner-core') && !CORE_EXPORTS.has(specifier);
         })
         .map(specifier => `${path.relative(REPO_ROOT, file)} → ${specifier}`)
     );
@@ -48,7 +48,7 @@ describe('查看器与 core 的边界', () => {
       BROWSER_SIDE.some(part => path.relative(VIEWER_SRC, file).split(path.sep).join('/').startsWith(part))
     );
     const violations = browserFiles.flatMap(file =>
-      imports(file).filter(specifier => specifier === '@open-wxa/wxa-runner-core').map(() => path.relative(REPO_ROOT, file))
+      imports(file).filter(specifier => specifier === '@feie9456/wxa-runner-core').map(() => path.relative(REPO_ROOT, file))
     );
     expect(browserFiles.length).toBeGreaterThan(0);
     expect(violations).toEqual([]);
@@ -63,7 +63,7 @@ describe('查看器与 core 的边界', () => {
   it('wxa-runner 命令行只在开发依赖里引用查看器：npm 用户装 wxa-runner 时不会装上它', () => {
     const cli = JSON.parse(fs.readFileSync(path.join(REPO_ROOT, 'packages/cli/package.json'), 'utf8'));
     for (const field of ['dependencies', 'optionalDependencies', 'peerDependencies']) {
-      expect(Object.keys(cli[field] ?? {}), field).not.toContain('@open-wxa/wxa-viewer');
+      expect(Object.keys(cli[field] ?? {}), field).not.toContain('@feie9456/wxa-viewer');
     }
   });
 

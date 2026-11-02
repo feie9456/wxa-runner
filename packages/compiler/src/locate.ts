@@ -12,7 +12,7 @@
 
 import fs from 'fs';
 import path from 'path';
-import { findDevtoolsPackageDirs } from '@open-wxa/wxa-runner-extractor';
+import { findDevtoolsPackageDirs } from '@feie9456/wxa-runner-extractor';
 
 export interface CompilerBinaries {
   wcc: string;

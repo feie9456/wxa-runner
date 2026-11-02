@@ -4,7 +4,7 @@
 
 import http from 'http';
 import { AddressInfo } from 'net';
-import { expect, test } from '@open-wxa/wxa-runner-playwright';
+import { expect, test } from '@feie9456/wxa-runner-playwright';
 
 /** 和模拟器（localhost）跨站的网页，页面上显示收到的 Cookie。/coop 开头的地址带 Cross-Origin-Opener-Policy */
 let h5: http.Server;

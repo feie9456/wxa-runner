@@ -7,5 +7,5 @@ export default defineConfig({
   target: 'node18',
   dts: true,
   sourcemap: true,
-  external: ['@playwright/test', '@open-wxa/wxa-runner-core']
+  external: ['@playwright/test', '@feie9456/wxa-runner-core']
 });

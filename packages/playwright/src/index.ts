@@ -1,7 +1,7 @@
 /**
- * @open-wxa/wxa-runner-playwright：在 Playwright 里测试小程序
+ * @feie9456/wxa-runner-playwright：在 Playwright 里测试小程序
  *
- *   import { test, expect } from '@open-wxa/wxa-runner-playwright';
+ *   import { test, expect } from '@feie9456/wxa-runner-playwright';
  *
  *   test('下单', async ({ miniProgram }) => {
  *     await miniProgram.open('pages/index/index');
@@ -11,7 +11,7 @@
 
 import path from 'path';
 import { expect as baseExpect, test as base } from '@playwright/test';
-import { DevServer } from '@open-wxa/wxa-runner-core';
+import { DevServer } from '@feie9456/wxa-runner-core';
 import { withEagerSourcePositions } from './launchOptions';
 import { miniProgramMatchers } from './matchers';
 import { createMiniProgram, MiniProgram } from './miniProgram';
@@ -19,7 +19,7 @@ import { devServerOptions, WxaServerOptions } from './server';
 
 export type { MiniProgram, MockHandler, RouteHandler } from './miniProgram';
 export type { MiniProgramRequest } from './request';
-export type { WebViewInfo } from '@open-wxa/wxa-runner-core';
+export type { WebViewInfo } from '@feie9456/wxa-runner-core';
 export type { WxaServerOptions } from './server';
 
 /** 在 playwright.config.ts 的 use 里配置，或在用例文件里用 test.use 修改 */

@@ -7,8 +7,8 @@
 import fs from 'fs';
 import path from 'path';
 import { strToU8, zipSync } from 'fflate';
-import { resolveBaseLib, usesIsolatedContext } from '@open-wxa/wxa-runner-extractor';
-import { AppBuilder, bundleSetup, findSetupFile, MiniProgram } from '@open-wxa/wxa-runner-core';
+import { resolveBaseLib, usesIsolatedContext } from '@feie9456/wxa-runner-extractor';
+import { AppBuilder, bundleSetup, findSetupFile, MiniProgram } from '@feie9456/wxa-runner-core';
 import { version } from '../../package.json';
 import { isPackStaticFile, PACK_FORMAT } from './format';
 import type { PackManifest } from './format';

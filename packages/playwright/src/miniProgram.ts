@@ -7,8 +7,8 @@
  */
 
 import type { FrameLocator, Page } from '@playwright/test';
-import type { ApiContext, ApiResult, FrameError, MockResponse, RecordedRequest, WxaTestApi } from '@open-wxa/wxa-runner-core';
-import type {} from '@open-wxa/wxa-runner-core/test-api';
+import type { ApiContext, ApiResult, FrameError, MockResponse, RecordedRequest, WxaTestApi } from '@feie9456/wxa-runner-core';
+import type {} from '@feie9456/wxa-runner-core/test-api';
 import { MiniProgramRequest, withBody } from './request';
 
 type Remote<T> = { [K in keyof T]: T[K] extends (...args: infer A) => infer R ? (...args: A) => Promise<Awaited<R>> : never };

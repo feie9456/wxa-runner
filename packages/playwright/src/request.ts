@@ -1,4 +1,4 @@
-import type { MockRequest, RecordedRequest } from '@open-wxa/wxa-runner-core';
+import type { MockRequest, RecordedRequest } from '@feie9456/wxa-runner-core';
 
 /** 小程序发出的一个 wx.request */
 export interface MiniProgramRequest extends RecordedRequest {

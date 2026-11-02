@@ -4,7 +4,7 @@
 
 import http from 'http';
 import { AddressInfo } from 'net';
-import { expect, test } from '@open-wxa/wxa-runner-playwright';
+import { expect, test } from '@feie9456/wxa-runner-playwright';
 
 // 按 worker 生效的选项只能写在文件顶层
 test.use({ wxaServerOptions: { setup: 'tests/playwright/setup/declared.setup.js' } });

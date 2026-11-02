@@ -53,7 +53,7 @@ function builtinSetupModule(): Plugin {
   return {
     name: 'wxa-setup-module',
     setup(pluginBuild) {
-      pluginBuild.onResolve({ filter: new RegExp(`^${SETUP_MODULE}$`) }, () => ({ path: SETUP_MODULE, namespace: 'wxa-setup' }));
+      pluginBuild.onResolve({ filter: /^@(?:open-wxa|feie9456)\/wxa-runner-core\/setup$/ }, () => ({ path: SETUP_MODULE, namespace: 'wxa-setup' }));
       pluginBuild.onLoad({ filter: /.*/, namespace: 'wxa-setup' }, () => ({
         contents: SETUP_MODULE_SOURCE,
         loader: 'js'

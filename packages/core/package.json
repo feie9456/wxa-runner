@@ -1,5 +1,5 @@
 {
-  "name": "@open-wxa/wxa-runner-core",
+  "name": "@feie9456/wxa-runner-core",
   "version": "0.12.2",
   "description": "Dev server and browser runtime that run WeChat mini-programs on the official base library",
   "license": "MIT",
@@ -57,8 +57,8 @@
     "dev": "tsup --watch"
   },
   "dependencies": {
-    "@open-wxa/wxa-runner-compiler": "workspace:*",
-    "@open-wxa/wxa-runner-extractor": "workspace:*",
+    "@feie9456/wxa-runner-compiler": "workspace:*",
+    "@feie9456/wxa-runner-extractor": "workspace:*",
     "chokidar": "^3.5.3",
     "esbuild": "^0.28.2",
     "express": "^4.18.2",

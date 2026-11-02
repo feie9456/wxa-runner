@@ -141,8 +141,8 @@ describe.skipIf(!ready || !viewerBuilt)('wxa-runner viewer preview / export', ()
 });
 
 describe('wxa-runner viewer：没装查看器', () => {
-  it('执行查看器命令时提示安装 @open-wxa/wxa-viewer，以 1 退出', () => {
-    // 预加载脚本让 @open-wxa/wxa-viewer 解析失败，模拟只装了 wxa-runner 的用户
+  it('执行查看器命令时提示安装 @feie9456/wxa-viewer，以 1 退出', () => {
+    // 预加载脚本让 @feie9456/wxa-viewer 解析失败，模拟只装了 wxa-runner 的用户
     const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'wxa-no-viewer-'));
     const block = path.join(dir, 'block-viewer.cjs');
     fs.writeFileSync(
@@ -150,8 +150,8 @@ describe('wxa-runner viewer：没装查看器', () => {
       `const Module = require('module');
 const resolve = Module._resolveFilename;
 Module._resolveFilename = function (request, ...rest) {
-  if (request === '@open-wxa/wxa-viewer') {
-    const error = new Error("Cannot find module '@open-wxa/wxa-viewer'");
+  if (request === '@feie9456/wxa-viewer') {
+    const error = new Error("Cannot find module '@feie9456/wxa-viewer'");
     error.code = 'MODULE_NOT_FOUND';
     throw error;
   }
@@ -161,11 +161,11 @@ Module._resolveFilename = function (request, ...rest) {
     const result = spawnSync(process.execPath, ['-r', block, CLI, 'viewer', 'export', path.join(dir, 'out')], { encoding: 'utf8', timeout: 30000 });
     fs.rmSync(dir, { recursive: true, force: true });
     expect(result.status).toBe(1);
-    expect(result.stderr).toContain('npm i -D @open-wxa/wxa-viewer');
+    expect(result.stderr).toContain('npm i -D @feie9456/wxa-viewer');
   });
 
   it('wxa-runner --help 列出 viewer 命令并说明需要查看器包', () => {
     const result = spawnSync(process.execPath, [CLI, '--help'], { encoding: 'utf8', timeout: 30000 });
-    expect(result.stdout).toMatch(/^\s+viewer\b[\s\S]*@open-wxa\/wxa-viewer/m);
+    expect(result.stdout).toMatch(/^\s+viewer\b[\s\S]*@feie9456\/wxa-viewer/m);
   });
 });

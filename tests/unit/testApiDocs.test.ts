@@ -69,8 +69,8 @@ describe('测试 API 的说明', () => {
       // 直接读源码里的注释，不依赖构建产物
       baseUrl: REPO_ROOT,
       paths: {
-        '@open-wxa/wxa-runner-core': ['packages/core/src/index.ts'],
-        '@open-wxa/wxa-runner-core/*': ['packages/core/src/*']
+        '@feie9456/wxa-runner-core': ['packages/core/src/index.ts'],
+        '@feie9456/wxa-runner-core/*': ['packages/core/src/*']
       }
     });
 

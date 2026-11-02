@@ -1,5 +1,5 @@
 import path from 'path';
-import type { DevServerOptions } from '@open-wxa/wxa-runner-core';
+import type { DevServerOptions } from '@feie9456/wxa-runner-core';
 
 /** 开发服务器的其余参数，如 baseLibVersion、device、setup */
 export type WxaServerOptions = Omit<DevServerOptions, 'projectPath' | 'port' | 'host' | 'watch' | 'runtimeDir' | 'logger'>;

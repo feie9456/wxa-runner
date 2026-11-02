@@ -83,7 +83,7 @@ async function smokeTest(tarballs, version) {
   const bin = path.join(dir, 'node_modules', '.bin', 'wxa-runner');
   const printed = run(bin, ['--version'], { cwd: dir }).trim();
   if (printed !== version) throw new Error(`wxa-runner --version 输出 ${printed}，应为 ${version}`);
-  run('node', ['-e', "require('@open-wxa/wxa-runner-playwright')"], { cwd: dir });
+  run('node', ['-e', "require('@feie9456/wxa-runner-playwright')"], { cwd: dir });
 
   const port = await freePort();
   const project = path.join(root, 'examples', 'hello-world');

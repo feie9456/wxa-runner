@@ -12,7 +12,7 @@
  */
 
 import express, { NextFunction, Request, Response, Router } from 'express';
-import { findDeveloperTicket } from '@open-wxa/wxa-runner-extractor';
+import { findDeveloperTicket } from '@feie9456/wxa-runner-extractor';
 import { explainErrcode, FindTicket, requireOk, WechatDevClient } from './wechatDev';
 
 const LOOPBACK_ADDRESSES = ['127.0.0.1', '::1', '::ffff:127.0.0.1'];

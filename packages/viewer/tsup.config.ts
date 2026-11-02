@@ -10,7 +10,7 @@ export default defineConfig([
     dts: true,
     sourcemap: true,
     shims: true,
-    external: ['@open-wxa/wxa-runner-core', '@open-wxa/wxa-runner-extractor', 'express', 'fflate']
+    external: ['@feie9456/wxa-runner-core', '@feie9456/wxa-runner-extractor', 'express', 'fflate']
   },
   // 浏览器端：查看页面和它的 Service Worker。依赖要全部打进去，浏览器里没有 node_modules
   {

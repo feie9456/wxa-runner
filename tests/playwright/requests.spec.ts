@@ -4,7 +4,7 @@
 
 import http from 'http';
 import { AddressInfo } from 'net';
-import { expect, test } from '@open-wxa/wxa-runner-playwright';
+import { expect, test } from '@feie9456/wxa-runner-playwright';
 
 /** 经开发服务器代理转发的请求到这里，记下收到的请求体 */
 let upstream: http.Server;
