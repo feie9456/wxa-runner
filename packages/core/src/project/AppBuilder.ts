@@ -17,7 +17,7 @@
  * Worker：workers 目录下的 JS 不进逻辑层，同样包装成 define 脚本，由 Worker 入口（server/html.ts 的 workerScript）加载
  */
 
-import { compileWxml, compileWxss, ComponentTags } from '@feie9456/wxa-runner-compiler';
+import { compileWxml, compileWxss, ComponentTags } from '@feie9454/wxa-runner-compiler';
 import { transformSync } from 'esbuild';
 import { AppJson, MiniProgram } from './MiniProgram';
 import { StyleMirror } from './StyleMirror';

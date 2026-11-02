@@ -2,7 +2,7 @@
  * fixture：打开页面、断言页面状态、调用页面方法，用例结束时检查运行时错误
  */
 
-import { expect, test } from '@feie9456/wxa-runner-playwright';
+import { expect, test } from '@feie9454/wxa-runner-playwright';
 
 test('开发者不用启动开发服务器，打开页面就能操作和断言当前页', async ({ miniProgram }) => {
   await miniProgram.open('pages/index/index');

@@ -6,7 +6,7 @@
  */
 
 import { strFromU8, unzipSync } from 'fflate';
-import type { BuildResult } from '@feie9456/wxa-runner-core/web';
+import type { BuildResult } from '@feie9454/wxa-runner-core/web';
 
 export const PACK_FORMAT = 1;
 

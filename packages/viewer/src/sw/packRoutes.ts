@@ -3,8 +3,8 @@
  * 提供文件接口和静态资源（packSw.ts 只负责事件接线，这里可以直接在 vitest 里测）
  */
 
-import { DEFAULT_DEVICE, extname, FileStore, hostHtml, mimeType, MOCK_ID_HEADER, MOCK_PREFIX, routeApp } from '@feie9456/wxa-runner-core/web';
-import type { AppInfo } from '@feie9456/wxa-runner-core/web';
+import { DEFAULT_DEVICE, extname, FileStore, hostHtml, mimeType, MOCK_ID_HEADER, MOCK_PREFIX, routeApp } from '@feie9454/wxa-runner-core/web';
+import type { AppInfo } from '@feie9454/wxa-runner-core/web';
 import { readPack } from '../pack/format';
 import type { WxaPack } from '../pack/format';
 import { getActiveProject } from '../store';

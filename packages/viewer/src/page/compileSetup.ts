@@ -3,7 +3,7 @@
  */
 
 import type { build as esbuildBuild, Plugin } from 'esbuild-wasm';
-import { SETUP_MODULE, SETUP_MODULE_SOURCE } from '@feie9456/wxa-runner-core/web';
+import { SETUP_MODULE, SETUP_MODULE_SOURCE } from '@feie9454/wxa-runner-core/web';
 
 type SetupBuild = typeof esbuildBuild;
 let compiler: Promise<SetupBuild> | undefined;
@@ -29,7 +29,7 @@ export async function compileSetup(source: string, filename = 'wxa.setup.ts', bu
     name: 'viewer-setup',
     setup(builder) {
       builder.onResolve({ filter: /.*/ }, args =>
-        /^@(?:open-wxa|feie9456)\/wxa-runner-core\/setup$/.test(args.path) ? { path: SETUP_MODULE, namespace: 'viewer-setup' } : { errors: [{ text: SINGLE_FILE_ERROR }] }
+        /^@(?:open-wxa|feie9454|feie9456)\/wxa-runner-core\/setup$/.test(args.path) ? { path: SETUP_MODULE, namespace: 'viewer-setup' } : { errors: [{ text: SINGLE_FILE_ERROR }] }
       );
       builder.onLoad({ filter: /.*/, namespace: 'viewer-setup' }, () => ({ contents: SETUP_MODULE_SOURCE, loader: 'js' }));
     }

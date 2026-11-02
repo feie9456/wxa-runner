@@ -14,9 +14,9 @@
 import fs from 'fs';
 import path from 'path';
 import { createRequire } from 'module';
-import { resolveBaseLib, ResolvedBaseLib } from '@feie9456/wxa-runner-extractor';
+import { resolveBaseLib, ResolvedBaseLib } from '@feie9454/wxa-runner-extractor';
 import { version } from '../../package.json';
-import { findRuntimeDir } from '@feie9456/wxa-runner-core';
+import { findRuntimeDir } from '@feie9454/wxa-runner-core';
 
 export interface ViewerSiteOptions {
   /** 不传时使用本机已安装的最新兼容基础库。 */

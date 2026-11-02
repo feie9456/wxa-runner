@@ -14,7 +14,7 @@
  * 插件页面的路径是 __plugin__/<插件 appid>/pages/x/x，基础库把 plugin://别名/页面名 解析成它再交给原生路由。
  */
 
-import { readWxvpkgFile, readWxvpkgIndex } from '@feie9456/wxa-runner-extractor';
+import { readWxvpkgFile, readWxvpkgIndex } from '@feie9454/wxa-runner-extractor';
 import type { BuildResult } from '../project/AppBuilder';
 import { AppBuild, PluginCode, withPlugins } from './pluginCode';
 import { requireOk, WechatDevClient } from './wechatDev';

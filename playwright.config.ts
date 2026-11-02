@@ -1,11 +1,11 @@
 /**
- * tests/playwright：用 @feie9456/wxa-runner-playwright 的 fixture 写的用例，接法与外部项目相同
+ * tests/playwright：用 @feie9454/wxa-runner-playwright 的 fixture 写的用例，接法与外部项目相同
  *
  * 先 pnpm build。Chrome 同 e2e：默认 /Applications/Google Chrome.app，其他位置用环境变量 WXA_CHROME 指定。
  */
 
 import { defineConfig } from '@playwright/test';
-import type { WxaOptions } from '@feie9456/wxa-runner-playwright';
+import type { WxaOptions } from '@feie9454/wxa-runner-playwright';
 
 export default defineConfig<WxaOptions>({
   testDir: 'tests/playwright',

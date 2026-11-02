@@ -33,7 +33,7 @@ import os from 'os';
 import path from 'path';
 import express, { Express, NextFunction, Request, Response } from 'express';
 import { WebSocket, WebSocketServer } from 'ws';
-import { readRegionData, resolveBaseLib, ResolvedBaseLib, usesIsolatedContext } from '@feie9456/wxa-runner-extractor';
+import { readRegionData, resolveBaseLib, ResolvedBaseLib, usesIsolatedContext } from '@feie9454/wxa-runner-extractor';
 import { AppBuilder } from '../project/AppBuilder';
 import { MiniProgram } from '../project/MiniProgram';
 import { ignoredStyleSources } from '../project/StyleMirror';

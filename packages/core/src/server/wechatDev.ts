@@ -5,7 +5,7 @@
  * 这些接口没有公开文档，请求和响应的格式取自开发者工具的实现和实测。
  */
 
-import { DeveloperTicket, TICKET_ENV } from '@feie9456/wxa-runner-extractor';
+import { DeveloperTicket, TICKET_ENV } from '@feie9454/wxa-runner-extractor';
 
 const BASE_URL = 'https://servicewechat.com';
 /** 开发者工具请求这些接口时带的版本号 */

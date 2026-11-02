@@ -1,5 +1,5 @@
 {
-  "name": "@feie9456/wxa-viewer",
+  "name": "@feie9454/wxa-viewer",
   "version": "0.10.0",
   "private": true,
   "description": "Run WeChat Mini Programs from a prebuilt .wxapack in the browser, without the source or a dev server",
@@ -32,8 +32,8 @@
     "dev": "tsup --watch"
   },
   "dependencies": {
-    "@feie9456/wxa-runner-core": "workspace:*",
-    "@feie9456/wxa-runner-extractor": "workspace:*",
+    "@feie9454/wxa-runner-core": "workspace:*",
+    "@feie9454/wxa-runner-extractor": "workspace:*",
     "esbuild-wasm": "0.28.2",
     "express": "^4.18.2",
     "fflate": "^0.8.3"

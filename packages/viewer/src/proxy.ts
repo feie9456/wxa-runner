@@ -5,7 +5,7 @@
  * 其余请求交给静态站点。只转发到白名单里的域名：不设限的话，任何人都能把部署出去的查看器当成代理用。
  */
 
-import { PROXY_PREFIX, proxyFetch } from '@feie9456/wxa-runner-core/web';
+import { PROXY_PREFIX, proxyFetch } from '@feie9454/wxa-runner-core/web';
 
 /** 需要交给代理的请求路径前缀 */
 export const PROXY_PATH = PROXY_PREFIX;

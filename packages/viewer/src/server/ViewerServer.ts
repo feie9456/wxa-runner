@@ -7,8 +7,8 @@
 import http from 'http';
 import os from 'os';
 import express from 'express';
-import { handleProxy, listen, LOCAL_HOST_OF_ANY_ADDRESS } from '@feie9456/wxa-runner-core';
-import { PROXY_PREFIX } from '@feie9456/wxa-runner-core/web';
+import { handleProxy, listen, LOCAL_HOST_OF_ANY_ADDRESS } from '@feie9454/wxa-runner-core';
+import { PROXY_PREFIX } from '@feie9454/wxa-runner-core/web';
 import { preloadURL, PRELOAD_PATH, resolvePackFiles, resolveViewerSite, viewerIndexHtml, ViewerSiteOptions } from './viewerSite';
 
 export interface ViewerServerOptions extends ViewerSiteOptions {

@@ -1,5 +1,5 @@
 {
-  "name": "@feie9456/wxa-runner",
+  "name": "@feie9454/wxa-runner",
   "version": "0.12.2",
   "description": "Run WeChat Mini Programs in the browser on the official base library, for debugging and E2E testing",
   "keywords": [
@@ -36,14 +36,14 @@
     "dev": "node bin/wxa-runner.js"
   },
   "dependencies": {
-    "@feie9456/wxa-runner-core": "workspace:*",
-    "@feie9456/wxa-runner-extractor": "workspace:*",
+    "@feie9454/wxa-runner-core": "workspace:*",
+    "@feie9454/wxa-runner-extractor": "workspace:*",
     "@vercel/detect-agent": "^1.2.7",
     "chalk": "^4.1.2",
     "commander": "^11.1.0"
   },
   "devDependencies": {
-    "@feie9456/wxa-viewer": "workspace:*"
+    "@feie9454/wxa-viewer": "workspace:*"
   },
   "engines": {
     "node": ">=18"

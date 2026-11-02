@@ -14,7 +14,7 @@ importers:
       '@commitlint/config-conventional':
         specifier: ^20.5.3
         version: 20.5.3
-      '@feie9456/wxa-runner-playwright':
+      '@feie9454/wxa-runner-playwright':
         specifier: workspace:*
         version: link:packages/playwright
       '@playwright/test':
@@ -68,10 +68,10 @@ importers:
 
   packages/cli:
     dependencies:
-      '@feie9456/wxa-runner-core':
+      '@feie9454/wxa-runner-core':
         specifier: workspace:*
         version: link:../core
-      '@feie9456/wxa-runner-extractor':
+      '@feie9454/wxa-runner-extractor':
         specifier: workspace:*
         version: link:../extractor
       '@vercel/detect-agent':
@@ -84,13 +84,13 @@ importers:
         specifier: ^11.1.0
         version: 11.1.0
     devDependencies:
-      '@feie9456/wxa-viewer':
+      '@feie9454/wxa-viewer':
         specifier: workspace:*
         version: link:../viewer
 
   packages/compiler:
     dependencies:
-      '@feie9456/wxa-runner-extractor':
+      '@feie9454/wxa-runner-extractor':
         specifier: workspace:*
         version: link:../extractor
     devDependencies:
@@ -107,10 +107,10 @@ importers:
 
   packages/core:
     dependencies:
-      '@feie9456/wxa-runner-compiler':
+      '@feie9454/wxa-runner-compiler':
         specifier: workspace:*
         version: link:../compiler
-      '@feie9456/wxa-runner-extractor':
+      '@feie9454/wxa-runner-extractor':
         specifier: workspace:*
         version: link:../extractor
       chokidar:
@@ -163,7 +163,7 @@ importers:
 
   packages/playwright:
     dependencies:
-      '@feie9456/wxa-runner-core':
+      '@feie9454/wxa-runner-core':
         specifier: workspace:*
         version: link:../core
     devDependencies:
@@ -179,10 +179,10 @@ importers:
 
   packages/viewer:
     dependencies:
-      '@feie9456/wxa-runner-core':
+      '@feie9454/wxa-runner-core':
         specifier: workspace:*
         version: link:../core
-      '@feie9456/wxa-runner-extractor':
+      '@feie9454/wxa-runner-extractor':
         specifier: workspace:*
         version: link:../extractor
       esbuild-wasm:

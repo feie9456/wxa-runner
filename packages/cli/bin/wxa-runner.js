@@ -37,7 +37,7 @@ program
   // 旧名，开发服务器会提示改用 --devtools-login
   .addOption(new Option('--real-login').hideHelp())
   .action(async (projectPath, options) => {
-    const { DevServer } = require('@feie9456/wxa-runner-core');
+    const { DevServer } = require('@feie9454/wxa-runner-core');
     const resolvedProjectPath = path.resolve(process.cwd(), projectPath);
 
     try {
@@ -86,11 +86,11 @@ program
     }
   });
 
-// 查看器：把小程序打成 .wxapack，不带源码在浏览器里运行。实现在 @feie9456/wxa-viewer 里，执行时才加载：
+// 查看器：把小程序打成 .wxapack，不带源码在浏览器里运行。实现在 @feie9454/wxa-viewer 里，执行时才加载：
 // wxa-runner 不依赖它，只用 dev 的人不会因此多装 esbuild-wasm 等依赖
 const viewer = program
   .command('viewer')
-  .description('查看器：把小程序打成 .wxapack，不带源码在浏览器里运行（需要 @feie9456/wxa-viewer）');
+  .description('查看器：把小程序打成 .wxapack，不带源码在浏览器里运行（需要 @feie9454/wxa-viewer）');
 
 viewer
   .command('pack <project-path>')
@@ -187,14 +187,14 @@ viewer
     }
   });
 
-/** @throws 没装 @feie9456/wxa-viewer 时，消息里说明怎么装 */
+/** @throws 没装 @feie9454/wxa-viewer 时，消息里说明怎么装 */
 function loadViewer() {
   try {
-    return require('@feie9456/wxa-viewer');
+    return require('@feie9454/wxa-viewer');
   } catch (error) {
     // 只处理查看器本身找不到；它内部依赖缺失等别的错误照常抛出
-    if (error.code === 'MODULE_NOT_FOUND' && error.message.includes("'@feie9456/wxa-viewer'")) {
-      throw new Error('查看器命令需要 @feie9456/wxa-viewer，请先安装：npm i -D @feie9456/wxa-viewer');
+    if (error.code === 'MODULE_NOT_FOUND' && error.message.includes("'@feie9454/wxa-viewer'")) {
+      throw new Error('查看器命令需要 @feie9454/wxa-viewer，请先安装：npm i -D @feie9454/wxa-viewer');
     }
     throw error;
   }
@@ -206,7 +206,7 @@ baselib
   .command('list')
   .description('列出可用的基础库：本机微信开发者工具已下载的和内置的')
   .action(() => {
-    const { listBaseLibs, MAX_COMPATIBLE_VERSION } = require('@feie9456/wxa-runner-extractor');
+    const { listBaseLibs, MAX_COMPATIBLE_VERSION } = require('@feie9454/wxa-runner-extractor');
     const libs = listBaseLibs();
     if (libs.length === 0) {
       console.log(chalk.yellow('没有找到基础库，请先安装并打开一次微信开发者工具，或重新安装依赖以安装内置基础库'));
@@ -224,7 +224,7 @@ baselib
   .command('extract [version]')
   .description('解包基础库到缓存目录（dev 命令会自动执行；内置基础库无需解包，直接输出所在目录）')
   .action(version => {
-    const { resolveBaseLib } = require('@feie9456/wxa-runner-extractor');
+    const { resolveBaseLib } = require('@feie9454/wxa-runner-extractor');
     try {
       const lib = resolveBaseLib({ version });
       console.log(`${chalk.green('✓')} 基础库 ${lib.version} → ${lib.dir}`);

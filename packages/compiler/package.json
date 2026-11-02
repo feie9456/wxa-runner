@@ -1,5 +1,5 @@
 {
-  "name": "@feie9456/wxa-runner-compiler",
+  "name": "@feie9454/wxa-runner-compiler",
   "version": "0.12.2",
   "description": "Wrapper around the official WXML/WXSS compilers (wcc/wcsc) shipped with WeChat DevTools",
   "license": "MIT",
@@ -22,7 +22,7 @@
     "build": "tsup"
   },
   "dependencies": {
-    "@feie9456/wxa-runner-extractor": "workspace:*"
+    "@feie9454/wxa-runner-extractor": "workspace:*"
   },
   "optionalDependencies": {
     "miniprogram-compiler": "0.2.3"

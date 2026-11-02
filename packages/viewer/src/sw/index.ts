@@ -1,8 +1,8 @@
 /** 查看器的 Service Worker（打包为 /__wxa__/runtime/pack-sw.js）：包和 setup 来自 IndexedDB，页面、文件与镜像响应在本地生成。 */
 
 import { createPackRequestContext, handlePackRequest, isPackNetworkRequest } from './packRoutes';
-import { mockedResponse } from '@feie9456/wxa-runner-core/web';
-import type { MockClient } from '@feie9456/wxa-runner-core/web';
+import { mockedResponse } from '@feie9454/wxa-runner-core/web';
+import type { MockClient } from '@feie9454/wxa-runner-core/web';
 
 // tsconfig 使用 DOM 类型，这里只声明本 Worker 需要的接口。
 interface ExtendableEvent extends Event {

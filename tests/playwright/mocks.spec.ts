@@ -2,7 +2,7 @@
  * fixture：mock 原生 API，对象在浏览器里返回，函数在 Node 里执行
  */
 
-import { expect, test } from '@feie9456/wxa-runner-playwright';
+import { expect, test } from '@feie9454/wxa-runner-playwright';
 
 test('开发者在打开页面前 mock，App.onLaunch 里的调用就拿到 mock 结果', async ({ miniProgram }) => {
   await miniProgram.mock('login', { code: 'from-test' });
