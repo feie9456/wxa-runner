@@ -17,8 +17,8 @@ describe('热更新分流', () => {
     });
   });
 
-  it('页面和组件的 JS 改动走逻辑热更新', () => {
-    expect(planHotUpdate(['pages/detail/detail.js', 'components/badge/badge.js'], units)).toEqual({
+  it('页面和组件的 JS / TS 改动走逻辑热更新', () => {
+    expect(planHotUpdate(['pages/detail/detail.js', 'components/badge/badge.ts', 'types/global.d.ts'], units)).toEqual({
       templates: [],
       scripts: ['pages/detail/detail', 'components/badge/badge'],
       styles: []

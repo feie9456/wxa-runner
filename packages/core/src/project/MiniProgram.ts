@@ -35,8 +35,8 @@ export interface UnitJson {
 }
 
 const IGNORED_DIRS = new Set(['node_modules', '.git', '.idea', '.vscode']);
-// wxa.setup.js 是 wxa-runner 的启动前脚本，不属于小程序
-const PROJECT_FILES = new Set(['project.config.json', 'project.private.config.json', 'sitemap.json', 'app.json', 'wxa.setup.js']);
+// wxa.setup.* 是 wxa-runner 的启动前脚本，不属于小程序
+const PROJECT_FILES = new Set(['project.config.json', 'project.private.config.json', 'sitemap.json', 'app.json', 'wxa.setup.js', 'wxa.setup.ts', 'wxa.setup.mjs']);
 
 export class MiniProgram {
   /** 小程序代码根目录（已考虑 project.config.json 的 miniprogramRoot） */
@@ -56,6 +56,17 @@ export class MiniProgram {
   /** project.config.json 里与 less / sass 编译插件有关的设置；每次重新读取，开发中修改了也能生效 */
   get styleSetting(): StyleSetting {
     return readStyleSetting(readJsonFile(path.join(this.projectPath, 'project.config.json'))?.setting);
+  }
+
+  /** project.config.json 里是否开启了 typescript 编译插件；每次重新读取，开发中修改了也能生效 */
+  get typescriptEnabled(): boolean {
+    const plugins = readJsonFile(path.join(this.projectPath, 'project.config.json'))?.setting?.useCompilerPlugins;
+    return Array.isArray(plugins) && plugins.some((item: unknown) => (Array.isArray(item) ? item[0] : item) === 'typescript');
+  }
+
+  /** 代码根目录下的 .ts 源文件（不含 .d.ts 类型声明） */
+  typescriptFiles(): string[] {
+    return this.listFiles(['.ts']).filter(file => !file.endsWith('.d.ts'));
   }
 
   readAppJson(): AppJson {

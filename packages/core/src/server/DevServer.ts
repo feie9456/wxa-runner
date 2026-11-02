@@ -168,6 +168,14 @@ export class DevServer {
         `[wxa-runner] ${files.length} 个 ${plugin} 样式文件不会生效（如 ${files[0]}）：project.config.json 的 setting.useCompilerPlugins 没有开启 ${plugin}，开发者工具同样不编译它们`
       );
     }
+    if (!this.project.typescriptEnabled) {
+      const tsFiles = this.project.typescriptFiles();
+      if (tsFiles.length > 0) {
+        this.logger.warn(
+          `[wxa-runner] ${tsFiles.length} 个 typescript 脚本文件不会生效（如 ${tsFiles[0]}）：project.config.json 的 setting.useCompilerPlugins 没有开启 typescript，开发者工具同样不编译它们`
+        );
+      }
+    }
     const extended = applyExtensions(options, options.extensions ?? [], { projectPath: this.project.projectPath, root: this.project.root });
     extended.middlewares.forEach(({ path: mountPath }) => assertMountPath(mountPath));
     this.webviewScripts = extended.webviewScripts;

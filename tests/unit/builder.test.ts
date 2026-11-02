@@ -62,6 +62,35 @@ describe('JS 模块包装', () => {
   it('转换失败时输出控制台错误而不是让整个逻辑层崩溃', () => {
     expect(builder.getModuleScript('utils/broken-esm.js')).toMatch(/^console\.error\(".*utils\/broken-esm\.js 转换失败/);
   });
+
+  it('开启 typescript 编译插件时编译 .ts 文件（覆盖同名 .js），排除 .d.ts 声明文件', () => {
+    const tsRoot = createProject({
+      'project.config.json': { setting: { useCompilerPlugins: ['typescript'] } },
+      'app.json': { pages: ['pages/a/a'] },
+      'app.ts': 'const x: number = 1;\nApp({ x } as any)',
+      'pages/a/a.json': {},
+      'pages/a/a.wxml': '<view/>',
+      'pages/a/a.js': 'Page({ fromJs: true })',
+      'pages/a/a.ts': "import { greet, type Greeting } from '../../lib/greet';\nconst g: Greeting = greet('ts');\nPage({ data: { g } })",
+      'lib/greet.ts': 'export type Greeting = string;\nexport function greet(name: string): Greeting { return `hi ${name}`; }',
+      'lib/types.d.ts': 'export declare const ONLY_TYPE: string;',
+      'pages/broken/broken.ts': 'export const x: = 1;'
+    });
+    const tsProject = new MiniProgram(tsRoot);
+    expect(tsProject.typescriptEnabled).toBe(true);
+    expect(tsProject.typescriptFiles()).toEqual(['app.ts', 'lib/greet.ts', 'pages/a/a.ts', 'pages/broken/broken.ts']);
+
+    const tsBuilder = new AppBuilder(tsProject);
+    const greetExports = runModule(tsBuilder.getModuleScript('lib/greet.js'));
+    expect(greetExports.greet('wxa')).toBe('hi wxa');
+
+    const pageScript = tsBuilder.getModuleScript('pages/a/a.js');
+    expect(pageScript).toContain('require("../../lib/greet")');
+    expect(pageScript).not.toContain('fromJs');
+    expect(pageScript).toContain('sourceMappingURL=data:application/json');
+
+    expect(tsBuilder.getModuleScript('pages/broken/broken.js')).toMatch(/^console\.error\(".*pages\/broken\/broken\.ts 转换失败/);
+  });
 });
 
 /** 像逻辑层一样执行 define 包装好的模块，返回它的 module.exports */
@@ -105,7 +134,9 @@ describe('增量构建标记', () => {
 
   it('只有小程序源文件的变化才需要重新构建', () => {
     expect(builder.invalidate(['images/logo.png'])).toBe(false);
+    expect(builder.invalidate(['types/global.d.ts'])).toBe(false);
     expect(builder.invalidate(['pages/a/a.js'])).toBe(true);
+    expect(builder.invalidate(['pages/a/a.ts'])).toBe(true);
     expect(builder.invalidate(['pages/a/a.wxss'])).toBe(true);
     expect(builder.invalidate(['pages/a/a.less'])).toBe(true);
     expect(builder.invalidate(['styles/theme.scss'])).toBe(true);

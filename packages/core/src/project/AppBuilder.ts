@@ -144,10 +144,27 @@ export class AppBuilder {
   /**
    * 单个 JS 模块的 define 包装
    *
-   * 包装头和代码第一行写在同一行，行号与源文件一致。使用 import/export 的文件
-   * 先转换为 CommonJS（对应开发者工具的「ES6 转 ES5」），并内联 source map。
+   * 包装头和代码第一行写在同一行，行号与源文件一致。开启 typescript 编译插件时优先编译同名 .ts；
+   * 使用 import/export 的 JS 文件先转换为 CommonJS（对应开发者工具的「ES6 转 ES5」），并内联 source map。
    */
   getModuleScript(id: string): string {
+    const tsId = id.endsWith('.js') && this.project.typescriptEnabled ? `${id.slice(0, -'.js'.length)}.ts` : null;
+    if (tsId && this.project.exists(tsId)) {
+      try {
+        const code = transformSync(this.project.readText(tsId), {
+          format: 'cjs',
+          loader: 'ts',
+          target: 'es2020',
+          sourcefile: tsId,
+          sourcemap: 'inline'
+        }).code;
+        return `define(${JSON.stringify(id)}, function(${MODULE_PARAMS}){${code}\n});\n`;
+      } catch (error) {
+        const message = `[wxa-runner] ${tsId} 转换失败：${(error as Error).message}`;
+        return `console.error(${JSON.stringify(message)});\n`;
+      }
+    }
+
     let code = this.project.readText(id);
     if (ESM_SYNTAX.test(code)) {
       try {
@@ -186,7 +203,7 @@ export class AppBuilder {
 
       const workersDir = this.project.workersDir(app);
       const inWorkers = (file: string) => workersDir !== null && file.startsWith(workersDir + '/');
-      const scripts = this.project.listFiles(['.js']);
+      const scripts = this.collectScripts();
       const modules = scripts.filter(file => !inWorkers(file));
 
       const serviceTemplates = this.createTemplates(app, units, unitJson, wxml.cut);
@@ -219,6 +236,17 @@ export class AppBuilder {
       dirty.forEach(kind => this.dirty.add(kind));
       throw error;
     }
+  }
+
+  /** 收集全部业务脚本模块 id（统一为 .js 后缀）；开启 typescript 编译插件时合并 .ts 源文件 */
+  private collectScripts(): string[] {
+    const jsFiles = this.project.listFiles(['.js']);
+    if (!this.project.typescriptEnabled) return jsFiles;
+    const merged = new Set(jsFiles);
+    for (const tsFile of this.project.typescriptFiles()) {
+      merged.add(`${tsFile.slice(0, -'.ts'.length)}.js`);
+    }
+    return [...merged].sort();
   }
 
   private async compileTemplates(units: string[], unitJson: Map<string, any>) {
@@ -323,6 +351,6 @@ function classifyFile(file: string): ChangeKind | null {
   if (file.endsWith('.wxml') || file.endsWith('.wxs')) return 'wxml';
   // less / sass 可以引用 .css
   if (/\.(wxss|less|scss|sass|css)$/.test(file)) return 'wxss';
-  if (file.endsWith('.js')) return 'js';
+  if (file.endsWith('.js') || (file.endsWith('.ts') && !file.endsWith('.d.ts'))) return 'js';
   return null;
 }

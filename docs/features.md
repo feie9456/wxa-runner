@@ -32,7 +32,7 @@ wxa-runner 用来本地调试和跑自动化测试，发布相关的事仍然在
 | 能力 | 支持 |
 | --- | --- |
 | 渲染 | WXML、WXSS、WXS、自定义组件，App / Page / Component 生命周期 |
-| 样式预处理 | 开发者工具的 less / sass 编译插件（`project.config.json` 的 `setting.useCompilerPlugins`），规则见下文 |
+| 样式与 TS 编译插件 | 开发者工具的 typescript / less / sass 编译插件（`project.config.json` 的 `setting.useCompilerPlugins`），规则见下文 |
 | 路由 | navigateTo、redirectTo 等页面路由，10 层页面栈，tabBar |
 | 分包 | 普通分包、独立分包，分包预下载（preloadRule），分包异步化：跨分包引用组件（componentPlaceholder）和 JS（require.async）。代码启动时全部加载，没有下载过程 |
 | Worker | wx.createWorker：和 Worker 互发消息（包括 ArrayBuffer）、terminate，workers 配置为分包。Worker 里能用异步的文件接口 |
@@ -66,7 +66,6 @@ wxa-runner 用来本地调试和跑自动化测试，发布相关的事仍然在
 - **基础库版本**：3.7.1 起不会自动选用，要用 `--baselib` 或 `WXA_BASELIB` 指定，启动时提示超出已验证的范围。内置的只有 3.7.0，更新的版本先在开发者工具里下载
 - **未实现的 API**：调用后返回成功，以免打断业务代码；测试里会被发现，见[检查运行时错误](./testing.md#检查运行时错误)
 - **设备能力**：不支持蓝牙等设备能力
-- **TypeScript 编译插件**：不支持 `useCompilerPlugins` 里的 `typescript`，`.ts` 文件要先编译成 `.js`
 - **地图**：MapContext 的 toScreenLocation、fromScreenLocation、地面覆盖物等方法基础库的网页实现里没有，调用后不会回调（[设计文档](https://github.com/open-wxa/wxa-runner/blob/main/PROJECT_DESIGN.md#原生组件)）
 - **插件**：只支持插件页面，要加 `--devtools-login`；插件的自定义组件和 `requirePlugin` 暂不支持（[#56](https://github.com/open-wxa/wxa-runner/issues/56)）
 - **Worker 里的接口**：只能用异步接口（如 FileSystemManager 的 readFile、writeFile），同步接口调用时报错；request、downloadFile、uploadFile、connectSocket 也不能用。

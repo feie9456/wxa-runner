@@ -63,6 +63,7 @@ if (kind === 'service') {
   emulateDeviceScreen(host.device);
   installInput();
   runLoadCallbacksEarly();
+  supportSkylineTextProps();
 }
 
 overrideUserAgent();
@@ -300,6 +301,63 @@ function overrideUserAgent() {
     Object.defineProperty(navigator, 'userAgent', { get: () => ua, configurable: true });
   } catch {
     // 只影响基础库对平台的判断，失败可以忽略
+  }
+}
+
+/**
+ * Skyline 的 <text overflow="ellipsis" max-lines="N"> 属性在 WebView 渲染层（exparser）的
+ * wx-text 上没有声明，补上这两个属性并映射为单行或多行省略样式
+ */
+function supportSkylineTextProps() {
+  let currentExparser: Record<string, unknown> | undefined;
+  const applyEllipsis = function (this: { $$?: HTMLElement; overflow?: string; maxLines?: number }) {
+    const el = this.$$;
+    if (!el) return;
+    if (this.overflow === 'ellipsis') {
+      const lines = Number(this.maxLines) || 1;
+      el.style.overflow = 'hidden';
+      el.style.textOverflow = 'ellipsis';
+      if (lines <= 1) {
+        el.style.whiteSpace = 'nowrap';
+        el.style.display = 'block';
+      } else {
+        el.style.display = '-webkit-box';
+        el.style.webkitBoxOrient = 'vertical';
+        el.style.webkitLineClamp = String(lines);
+        el.style.whiteSpace = 'normal';
+      }
+    }
+  };
+  try {
+    Object.defineProperty(window, 'exparser', {
+      configurable: true,
+      enumerable: true,
+      get: () => currentExparser,
+      set(val: Record<string, unknown> | undefined) {
+        currentExparser = val;
+        if (!val || typeof val.registerElement !== 'function') return;
+        const orig = val.registerElement as ((def: Record<string, any>) => unknown) & { __wxaPatched?: boolean };
+        if (orig.__wxaPatched) return;
+        const wrapped = Object.assign(function (this: unknown, def: Record<string, any>) {
+          if (def && def.is === 'wx-text') {
+            def.properties = {
+              ...def.properties,
+              overflow: { type: String, value: '', public: true, observer: '_applySkylineEllipsis' },
+              maxLines: { type: Number, value: 0, public: true, observer: '_applySkylineEllipsis' }
+            };
+            def.methods = {
+              ...def.methods,
+              _applySkylineEllipsis: applyEllipsis
+            };
+          }
+          return orig.call(this, def);
+        }, orig);
+        wrapped.__wxaPatched = true;
+        val.registerElement = wrapped;
+      }
+    });
+  } catch {
+    // 忽略重定义失败
   }
 }
 
